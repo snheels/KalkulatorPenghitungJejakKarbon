@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Jejak Karbon Alat Elektronik</title>
+    <link rel="stylesheet" href="pipas.css">
+</head>
+<body>
+  <main>
+      <div class="container-new">
+        <div class="container">
+            <h1>Kalkulator Jejak Karbon Alat Elektronik</h1>
+            <div class="form-group">
+                <label for="device">Pilih Alat Elektronik:</label>
+                <select id="device" onchange="setPower()">
+                    <option value="dispenser" data-power="500">Dispenser</option>
+                    <option value="kipas_angin" data-power="70">Kipas Angin</option>
+                    <option value="komputer" data-power="200">Komputer</option>
+                    <option value="kulkas" data-power="150">Kulkas</option>
+                    <option value="laptop" data-power="50">Laptop</option>
+                    <option value="mesin_laminating" data-power="300">Mesin Laminating</option>
+                    <option value="printer" data-power="100">Printer</option>
+                    <option value="rice_cooker" data-power="400">Rice Cooker</option>
+                    <option value="televisi" data-power="120">Televisi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="power">Daya Alat (Watt):</label>
+                <input type="number" id="power" placeholder="Daya alat dalam watt" readonly>
+            </div>
+            <div class="form-group">
+                <label for="hours">Jam Penggunaan per Hari:</label>
+                <input type="number" id="hours" placeholder="Masukkan jam penggunaan per hari">
+            </div>
+            <div class="form-group">
+                <label for="days">Hari Penggunaan per Bulan:</label>
+                <input type="number" id="days" placeholder="Masukkan hari penggunaan per bulan">
+            </div>
+            <div class="form-group">
+                <button onclick="addDevice()">Tambahkan Alat</button>
+            </div>
+            <div class="result" id="deviceList"></div>
+        </div>
+
+        <div class="container">
+            <h1>Kalkulator Penggunaan Listrik Wilayah</h1>
+            <div class="form-group">
+                <label for="region">Jaringan Listrik:</label>
+                <select id="region">
+                    <option value="aceh">Aceh</option>
+                    <option value="sumatera_utara">Sumatera Utara</option>
+                    <option value="sumatera_barat">Sumatera Barat</option>
+                    <option value="riau">Riau</option>
+                    <option value="kepulauan_riau">Kepulauan Riau</option>
+                    <option value="jambi">Jambi</option>
+                    <option value="sumatera_selatan">Sumatera Selatan</option>
+                    <option value="bengkulu">Bengkulu</option>
+                    <option value="lampung">Lampung</option>
+                    <option value="bangka_belitung">Bangka Belitung</option>
+                    <option value="banten">Banten</option>
+                    <option value="jakarta">Jakarta</option>
+                    <option value="jawa_barat">Jawa Barat</option>
+                    <option value="jawa_tengah">Jawa Tengah</option>
+                    <option value="yogyakarta">Yogyakarta</option>
+                    <option value="jawa_timur">Jawa Timur</option>
+                    <option value="bali">Bali</option>
+                    <option value="nusa_tenggara_barat">Nusa Tenggara Barat</option>
+                    <option value="nusa_tenggara_timur">Nusa Tenggara Timur</option>
+                    <option value="kalimantan_barat">Kalimantan Barat</option>
+                    <option value="kalimantan_tengah">Kalimantan Tengah</option>
+                    <option value="kalimantan_selatan">Kalimantan Selatan</option>
+                    <option value="kalimantan_timur">Kalimantan Timur</option>
+                    <option value="kalimantan_utara">Kalimantan Utara</option>
+                    <option value="sulawesi_utara">Sulawesi Utara</option>
+                    <option value="sulawesi_tengah">Sulawesi Tengah</option>
+                    <option value="sulawesi_selatan">Sulawesi Selatan</option>
+                    <option value="sulawesi_tenggara">Sulawesi Tenggara</option>
+                    <option value="gorontalo">Gorontalo</option>
+                    <option value="sulawesi_barat">Sulawesi Barat</option>
+                    <option value="maluku">Maluku</option>
+                    <option value="maluku_utara">Maluku Utara</option>
+                    <option value="papua">Papua</option>
+                    <option value="papua_barat">Papua Barat</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="limit">Batas Daya (VA):</label>
+                <select id="limit">
+                    <option value="450">450 VA</option>
+                    <option value="900">900 VA</option>
+                    <option value="1300">1300 VA</option>
+                    <option value="2200">2200 VA</option>
+                    <option value="3500">3500 VA</option>
+                    <option value="4400">4400 VA</option>
+                    <option value="5500">5500 VA</option>
+                    <option value="6600">6600 VA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button onclick="calculateRegionalCarbonFootprint()">Hitung Jejak Karbon</button>
+            </div>
+            <div class="result" id="regionalResult"></div>
+        </div>
+
+        <div class="container">
+            <h1>Kalkulator Jejak Karbon AC/Pendingin Ruangan</h1>
+            <div class="form-group">
+                <label for="acCapacity">Kapasitas AC (PK):</label>
+                <select id="acCapacity">
+                    <option value="0.5">0.5 PK</option>
+                    <option value="1">1 PK</option>
+                    <option value="1.5">1.5 PK</option>
+                    <option value="2">2 PK</option>
+                    <option value="2.5">2.5 PK</option>
+                    <option value="3">3 PK</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="acCount">Jumlah Total Pendingin Ruangan:</label>
+                <input type="number" id="acCount" placeholder="Masukkan jumlah total pendingin ruangan">
+            </div>
+            <div class="form-group">
+                <label for="acHours">Durasi (Jam/Hari):</label>
+                <input type="number" id="acHours" placeholder="Masukkan durasi penggunaan per hari">
+            </div>
+            <div class="form-group">
+                <label for="acDays">Total Hari Penggunaan Dalam Sebulan:</label>
+                <input type="number" id="acDays" placeholder="Masukkan total hari penggunaan dalam sebulan">
+            </div>
+            <div class="form-group">
+                <button onclick="calculateACCarbonFootprint()">Hitung Jejak Karbon</button>
+            </div>
+            <div class="result" id="acResult"></div>
+        </div>
+
+        <div class="container">
+            <h1>Hasil Perhitungan</h1>
+            <div class="result" id="totalResult"></div>
+        </div>
+    </div>
+  </main>
+  <footer>
+    <p>© 2025 Jejak Karbon, Kelompok 8.</p>
+  </footer>
+
+    <script src="pipas.js"></script>
+</body>
+</html>
